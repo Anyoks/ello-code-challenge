@@ -57,8 +57,18 @@ export default function Book() {
       <div className="title"> {data.book.title}</div>
       {
         <div className="doublePageView">
-          <div className="flex-child"></div>
-          <div className="flex-child"></div>
+          <div className="flex-child">
+            <Page
+              tokens={data.book.pages[pageA].tokens}
+              content={data.book.pages[pageA].content}
+            ></Page>
+          </div>
+          <div className="flex-child">
+            <Page
+              tokens={data.book.pages[pageA + 1].tokens}
+              content={data.book.pages[pageA + 1].content}
+            ></Page>
+          </div>
         </div>
       }
       <div className="nav-buttons">

@@ -1,0 +1,29 @@
+#container {
+  /* float: left; */
+  margin: 2em;
+  width: 100%;
+
+}
+
+.p {
+  font-size: 1.5em;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.no-indent {
+  font-size: 1.5em;
+  text-indent: 0px;
+  text-align: justify;
+  letter-spacing: 3px;
+}
+
+.grab {
+  cursor: -webkit-grab;
+  cursor: grab;
+}
