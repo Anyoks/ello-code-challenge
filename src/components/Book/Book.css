@@ -1,0 +1,45 @@
+.title {
+  text-align: center;
+  padding-top: 30px;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.doublePageView {
+  display: flex;
+  flex-direction: row;
+  margin: 2em;
+}
+
+.flex-child {
+  flex: 1;
+  /* flex-grow: 1; */
+  border: 2px solid rgb(0, 0, 0);
+}
+
+.flex-child:first-child {
+  margin-right: 20px;
+  border: 2px solid rgb(0, 0, 0);
+}
+
+.nav-buttons {
+  display: flex;
+  margin-left: 2em;
+  margin-right: 2em;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+p {
+  font-size: 1.5em;
+  text-indent: 50px;
+  text-align: justify;
+  letter-spacing: 3px;
+}
+
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
