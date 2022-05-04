@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./page.css";
 import Modal from "react-modal";
+import PropTypes from "prop-types";
 
 Modal.setAppElement("#root");
 export default function Page({ tokens, content }) {
@@ -67,3 +68,8 @@ export default function Page({ tokens, content }) {
     </>
   );
 }
+
+Page.propTypes = {
+  content: PropTypes.string.isRequired,
+  tokens: PropTypes.array.isRequired,
+};
