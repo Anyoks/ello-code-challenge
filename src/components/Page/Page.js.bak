@@ -1,0 +1,95 @@
+import React, { useState } from "react";
+import "./page.css";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
+export default function Page({ tokens, content }) {
+  let manipulatable = content;
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedWord, setWord] = useState("");
+
+  function toggleModal() {
+    setIsOpen(!isOpen);
+  }
+
+  // Get an array of individual elements fromthe content
+  let arrContent = Array.from(content);
+
+  const handleClick = (word) => {
+    console.log("clicked a word");
+    console.log(word);
+    setWord(word);
+    setIsOpen(!isOpen);
+  };
+
+  const renderParagraph3 = () => {
+    // set the variable to keep track of the original position in the new array
+    let diff = 0;
+
+    // iterate throught the tokens
+    for (let i = 0; i < tokens.length; i++) {
+      //
+      // console.log(`${tokens[i].position} - ${tokens[i].value}`);
+      // let str;
+
+      // console.log(`diff = ${diff} -- i = ${i}`);
+      // console.log(arrContent.slice((tokens[i].position[0] - diff ), (tokens[i].position[1] - diff)));
+
+      // compute the proper place to insert new clickable word using diff variable
+      let start = tokens[i].position[0] - diff;
+      let end = tokens[i].position[1] - diff;
+      let offset = end - start;
+      // wrap the proper word with clickable element
+      let formatted = clickable(i);
+
+      // console.log("Before replacement");
+      let lengthBefore = arrContent.length;
+      // console.log(`Before replacement - length ${lengthBefore}`);
+      // console.log(arrContent);
+      // replace the array of letter with the formatted clickable word
+      arrContent.splice(start, offset, formatted);
+      // console.log(arrContent.splice(start, offset, formatted));
+      // console.log(arrContent);
+
+      // proper position of this formatted word in the new array depnds on the
+      // length of the old array.
+      diff = Array.from(content).length - arrContent.length; // - lengthBefore;
+      // console.log(`After replacement - length ${arrContent.length}`);
+      // console.log(`diff ${diff}`);
+      // console.log("+++++++++++");
+    }
+    return arrContent;
+  };
+
+  const renderParagraph = () =>
+    tokens.map((token) => (
+      <span onClick={() => handleClick(token.value)}>
+        {content.slice(token.position[0], token.position[1])}
+      </span>
+    ));
+
+  function clickable(i) {
+    return (
+      <span key={i} class="grab" onClick={() => handleClick(tokens[i].value)}>
+        {content.slice(tokens[i].position[0], tokens[i].position[1])}
+      </span>
+    );
+  }
+
+  return (
+    <>
+      <p>{renderParagraph3()}</p>
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={toggleModal}
+        contentLabel="My dialog"
+        tokenValue={selectedWord}
+      >
+        <div className="modal">
+          <p className="no-indent"> {selectedWord}</p>
+          <button onClick={toggleModal}>Close</button>
+        </div>
+      </Modal>
+    </>
+  );
+}
